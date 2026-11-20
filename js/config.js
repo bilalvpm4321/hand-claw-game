@@ -71,7 +71,7 @@ export const CONFIG = {
 
   // ── Hand tracking ──────────────────────────────────────────
   hand: {
-    modelComplexity: 1,  // 0 = faster, 1 = more accurate
+    modelComplexity: 0,  // 0 = fast lite model (recommended for browser), 1 = full model
     // Part of the camera image that maps to the whole play area.
     // Smaller box = you need to move your hand less.
     region: { x0: 0.18, x1: 0.82, y0: 0.15, y1: 0.80 },

@@ -18,11 +18,15 @@ export class InputManager {
     this.tracker = null;
   }
 
-  async useHand() {
+  preload() {
+    return HandTracker.preload(this.cfg.hand.modelComplexity);
+  }
+
+  async useHand(onStatus) {
     this.mouse.detach();
     this.mapper.reset();
     this.tracker = new HandTracker((results, video) => this._onHandResults(results, video), this.cfg.hand.modelComplexity);
-    await this.tracker.start();
+    await this.tracker.start(onStatus);
     this.preview.show();
     this.mode = 'hand';
   }

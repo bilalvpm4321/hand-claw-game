@@ -23,7 +23,9 @@ screens.onPlayHand = async () => {
   sound.unlock();
   screens.setMenuBusy(true, 'Starting camera… allow access if your browser asks.');
   try {
-    await input.useHand();
+    await input.useHand((status) => {
+      if (status) screens.setMenuBusy(true, status);
+    });
     game.start();
   } catch (err) {
     console.error(err);
@@ -61,6 +63,16 @@ window.addEventListener('keydown', (e) => {
 
 screens.showMenu();
 game.run();
+
+// Pre-warm MediaPipe models in the background while the player views the menu.
+if (typeof window !== 'undefined') {
+  const warmUp = () => input.preload();
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(warmUp, { timeout: 1500 });
+  } else {
+    setTimeout(warmUp, 200);
+  }
+}
 
 // Handy for debugging in the browser console.
 window.__game = game;
