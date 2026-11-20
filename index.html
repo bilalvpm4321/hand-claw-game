@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claw Catch – play with your hand</title>
+  <link rel="stylesheet" href="css/main.css" />
+
+  <!-- Three.js is loaded from the local vendor folder (works offline). -->
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three/three.module.js" } }
+  </script>
+
+  <!-- MediaPipe Hands (hand tracking), also local. Defines window.Hands. -->
+  <script src="vendor/mediapipe/hands/hands.js"></script>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <!-- ── Heads-up display ─────────────────────────────── -->
+  <div id="hud">
+    <div class="stat">
+      <span class="label">Score</span>
+      <span class="value" id="score">0</span>
+    </div>
+    <div class="stat" id="time-box">
+      <span class="label">Time</span>
+      <span class="value" id="time">60</span>
+    </div>
+    <div class="stat small">
+      <span class="label">Best</span>
+      <span class="value" id="best">0</span>
+    </div>
+  </div>
+  <div id="streak"></div>
+  <div id="gesture"></div>
+  <div id="popups"></div>
+
+  <!-- ── Webcam preview ───────────────────────────────── -->
+  <div id="cam-wrap">
+    <canvas id="cam" width="240" height="180"></canvas>
+  </div>
+  <div id="mute-hint">Sound on (M)</div>
+
+  <!-- ── Start menu ───────────────────────────────────── -->
+  <section id="screen-menu" class="screen">
+    <div class="card">
+      <h1>Claw Catch</h1>
+      <p class="lead">Steer the claw with your bare hand. Grab a floating ball and drop it in the bucket.</p>
+
+      <ol class="how">
+        <li><strong>Move</strong> your hand to move the claw. Up lifts it, down lowers it.</li>
+        <li><strong>Close</strong> your fist when a ball sits between the fingers.</li>
+        <li><strong>Open</strong> your hand above the bucket to let it go.</li>
+      </ol>
+
+      <div class="buttons">
+        <button id="btn-hand" class="primary">Play with my hand</button>
+        <button id="btn-mouse" class="secondary">Play with mouse</button>
+      </div>
+      <p id="menu-msg"></p>
+      <p class="tip">Sit about an arm’s length from the camera in good light. The mouse mode works like the hand: hold the button or Space to close.</p>
+    </div>
+  </section>
+
+  <!-- ── Countdown ────────────────────────────────────── -->
+  <section id="screen-count" class="screen clear">
+    <div id="count-text">3</div>
+  </section>
+
+  <!-- ── Game over ────────────────────────────────────── -->
+  <section id="screen-over" class="screen">
+    <div class="card">
+      <h2>Time’s up</h2>
+      <div class="final" id="final-score">0</div>
+      <p class="lead" id="final-note"></p>
+      <div class="buttons">
+        <button id="btn-again" class="primary">Play again</button>
+        <button id="btn-menu" class="secondary">Main menu</button>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

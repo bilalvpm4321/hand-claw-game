@@ -1,0 +1,11 @@
+{
+  "name": "hand-claw-game",
+  "version": "1.0.0",
+  "description": "Catch the balls with a claw controlled by your bare hand.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node --import ./tests/register.mjs tests/simulate.mjs"
+  }
+}
